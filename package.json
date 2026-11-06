@@ -1,5 +1,5 @@
 {
-  "name": "@types/com",
+  "name": "com-types",
   "version": "1.0.0",
   "description": "COM types for JScript",
   "homepage": "https://github.com/Iemand005/LibCOMTS#readme",
