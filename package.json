@@ -13,7 +13,11 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "*.d.ts",
+    "README.md"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
