@@ -1194,7 +1194,7 @@ declare interface IShellNameSpace {
     SetRoot(bstrFullPath: string): void;
     SetViewType(iType: number): void;
     SelectedItems(): any;
-    Expand(var: any, iDepth: number): void;
+    Expand(var_: any, iDepth: number): void;
     UnselectAll(): void;
     readonly SubscriptionsEnabled: boolean;
     EnumOptions: number;
