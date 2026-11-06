@@ -29,6 +29,14 @@ declare interface IWebBrowser {
     readonly LocationName: string;
     readonly LocationURL: string;
     readonly Busy: boolean;
+    attachEvent<T extends keyof DWebBrowserEventsHandlers>(
+        event: T,
+        handler: DWebBrowserEventsHandlers[T]
+    ): boolean;
+    detachEvent<T extends keyof DWebBrowserEventsHandlers>(
+        event: T,
+        handler: DWebBrowserEventsHandlers[T]
+    ): void;
 }
 
 declare interface DWebBrowserEvents {
@@ -49,6 +57,26 @@ declare interface DWebBrowserEvents {
     WindowResize(): void;
     WindowActivate(): void;
     PropertyChange(Property: string): void;
+}
+
+declare interface DWebBrowserEventsHandlers {
+    "onbeforenavigate": (URL: string, Flags: number, TargetFrameName: string, PostData: any, Headers: string, Cancel: boolean) => void;
+    "onnavigatecomplete": (URL: string) => void;
+    "onstatustextchange": (Text: string) => void;
+    "onprogresschange": (Progress: number, ProgressMax: number) => void;
+    "ondownloadcomplete": () => void;
+    "oncommandstatechange": (Command: number, Enable: boolean) => void;
+    "ondownloadbegin": () => void;
+    "onnewwindow": (URL: string, Flags: number, TargetFrameName: string, PostData: any, Headers: string, Processed: boolean) => void;
+    "ontitlechange": (Text: string) => void;
+    "onframebeforenavigate": (URL: string, Flags: number, TargetFrameName: string, PostData: any, Headers: string, Cancel: boolean) => void;
+    "onframenavigatecomplete": (URL: string) => void;
+    "onframenewwindow": (URL: string, Flags: number, TargetFrameName: string, PostData: any, Headers: string, Processed: boolean) => void;
+    "onquit": (Cancel: boolean) => void;
+    "onwindowmove": () => void;
+    "onwindowresize": () => void;
+    "onwindowactivate": () => void;
+    "onpropertychange": (Property: string) => void;
 }
 
 declare enum CommandStateChangeConstants {
@@ -100,6 +128,14 @@ declare interface IWebBrowserApp {
     ToolBar: number;
     MenuBar: boolean;
     FullScreen: boolean;
+    attachEvent<T extends keyof DWebBrowserEvents2Handlers>(
+        event: T,
+        handler: DWebBrowserEvents2Handlers[T]
+    ): boolean;
+    detachEvent<T extends keyof DWebBrowserEvents2Handlers>(
+        event: T,
+        handler: DWebBrowserEvents2Handlers[T]
+    ): void;
 }
 
 declare interface IWebBrowser2 {
@@ -157,6 +193,14 @@ declare interface IWebBrowser2 {
     TheaterMode: boolean;
     AddressBar: boolean;
     Resizable: boolean;
+    attachEvent<T extends keyof DWebBrowserEvents2Handlers>(
+        event: T,
+        handler: DWebBrowserEvents2Handlers[T]
+    ): boolean;
+    detachEvent<T extends keyof DWebBrowserEvents2Handlers>(
+        event: T,
+        handler: DWebBrowserEvents2Handlers[T]
+    ): void;
 }
 
 declare enum OLECMDID {
@@ -327,6 +371,50 @@ declare interface DWebBrowserEvents2 {
     WebWorkerFinsihed(dwUniqueID: number): void;
 }
 
+declare interface DWebBrowserEvents2Handlers {
+    "onstatustextchange": (Text: string) => void;
+    "onprogresschange": (Progress: number, ProgressMax: number) => void;
+    "oncommandstatechange": (Command: number, Enable: boolean) => void;
+    "ondownloadbegin": () => void;
+    "ondownloadcomplete": () => void;
+    "ontitlechange": (Text: string) => void;
+    "onpropertychange": (szProperty: string) => void;
+    "onbeforenavigate2": (pDisp: any, URL: any, Flags: any, TargetFrameName: any, PostData: any, Headers: any, Cancel: boolean) => void;
+    "onnewwindow2": (ppDisp: any, Cancel: boolean) => void;
+    "onnavigatecomplete2": (pDisp: any, URL: any) => void;
+    "ondocumentcomplete": (pDisp: any, URL: any) => void;
+    "onquit": () => void;
+    "onvisible": (Visible: boolean) => void;
+    "ontoolbar": (ToolBar: boolean) => void;
+    "onmenubar": (MenuBar: boolean) => void;
+    "onstatusbar": (StatusBar: boolean) => void;
+    "onfullscreen": (FullScreen: boolean) => void;
+    "ontheatermode": (TheaterMode: boolean) => void;
+    "onwindowsetresizable": (Resizable: boolean) => void;
+    "onwindowsetleft": (Left: number) => void;
+    "onwindowsettop": (Top: number) => void;
+    "onwindowsetwidth": (Width: number) => void;
+    "onwindowsetheight": (Height: number) => void;
+    "onwindowclosing": (IsChildWindow: boolean, Cancel: boolean) => void;
+    "onclienttohostwindow": (CX: number, CY: number) => void;
+    "onsetsecurelockicon": (SecureLockIcon: number) => void;
+    "onfiledownload": (ActiveDocument: boolean, Cancel: boolean) => void;
+    "onnavigateerror": (pDisp: any, URL: any, Frame: any, StatusCode: any, Cancel: boolean) => void;
+    "onprinttemplateinstantiation": (pDisp: any) => void;
+    "onprinttemplateteardown": (pDisp: any) => void;
+    "onupdatepagestatus": (pDisp: any, nPage: any, fDone: any) => void;
+    "onprivacyimpactedstatechange": (bImpacted: boolean) => void;
+    "onnewwindow3": (ppDisp: any, Cancel: boolean, dwFlags: number, bstrUrlContext: string, bstrUrl: string) => void;
+    "onsetphishingfilterstatus": (PhishingFilterStatus: number) => void;
+    "onwindowstatechanged": (dwWindowStateFlags: number, dwValidFlagsMask: number) => void;
+    "onnewprocess": (lCauseFlag: number, pWB2: any, Cancel: boolean) => void;
+    "onthirdpartyurlblocked": (URL: any, dwCount: number) => void;
+    "onredirectxdomainblocked": (pDisp: any, StartURL: any, RedirectURL: any, Frame: any, StatusCode: any) => void;
+    "onbeforescriptexecute": (pDispWindow: any) => void;
+    "onwebworkerstarted": (dwUniqueID: number, bstrWorkerLabel: string) => void;
+    "onwebworkerfinsihed": (dwUniqueID: number) => void;
+}
+
 declare enum ShellWindowTypeConstants {
     SWC_EXPLORER = 0,
     SWC_BROWSER = 1,
@@ -344,6 +432,11 @@ declare enum ShellWindowFindWindowOptions {
 declare interface DShellWindowsEvents {
     WindowRegistered(lCookie: number): void;
     WindowRevoked(lCookie: number): void;
+}
+
+declare interface DShellWindowsEventsHandlers {
+    "onwindowregistered": (lCookie: number) => void;
+    "onwindowrevoked": (lCookie: number) => void;
 }
 
 declare interface IShellWindows {
@@ -365,6 +458,14 @@ declare interface IShellWindows {
     OnCreated(lCookie: number, punk: any): void;
     ProcessAttachDetach(fAttach: boolean): void;
     readonly Count: number;
+    attachEvent<T extends keyof DShellWindowsEventsHandlers>(
+        event: T,
+        handler: DShellWindowsEventsHandlers[T]
+    ): boolean;
+    detachEvent<T extends keyof DShellWindowsEventsHandlers>(
+        event: T,
+        handler: DShellWindowsEventsHandlers[T]
+    ): void;
 }
 
 declare interface IShellUIHelper {
@@ -1041,6 +1142,13 @@ declare interface DShellNameSpaceEvents {
     Initialized(): void;
 }
 
+declare interface DShellNameSpaceEventsHandlers {
+    "onfavoritesselectionchange": (cItems: number, hItem: number, strName: string, strUrl: string, cVisits: number, strDate: string, fAvailableOffline: number) => void;
+    "onselectionchange": () => void;
+    "ondoubleclick": () => void;
+    "oninitialized": () => void;
+}
+
 declare interface IShellFavoritesNameSpace {
     QueryInterface(riid: GUID, ppvObj: void): void;
     AddRef(): number;
@@ -1098,6 +1206,14 @@ declare interface IShellNameSpace {
     TVFlags: number;
     Columns: string;
     readonly CountViewTypes: number;
+    attachEvent<T extends keyof DShellNameSpaceEventsHandlers>(
+        event: T,
+        handler: DShellNameSpaceEventsHandlers[T]
+    ): boolean;
+    detachEvent<T extends keyof DShellNameSpaceEventsHandlers>(
+        event: T,
+        handler: DShellNameSpaceEventsHandlers[T]
+    ): void;
 }
 
 declare interface IScriptErrorList {
